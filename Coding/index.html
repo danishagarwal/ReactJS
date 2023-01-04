@@ -12,36 +12,15 @@
 
 <body>
     <div id="header">
-        <h1>Hello World</h1>
     </div>
     <div id="root">
         Not Rendered
         <!-- Anything inside this will not be rendered because react is present and it overrides everything -->
         <!-- It will just be displated for a milisecond because it takes time to load the React script -->
     </div>
-    <div id="footer"></div>
 
-
-
-    <!-- JavaScript way to print Hello World -->
-    <script>
-        const heading = document.createElement("h1")
-        heading.innerHTML = "Hello JavaScript"
-        const root = document.getElementById("footer")
-        root.appendChild(heading)
-    </script>
-
-
-    <!-- REACT PART OF HELLO WORLD -->
-
-    <!-- Core library of React -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <!-- Document Library of React -->
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-
-    <!-- We are adding react only in DIV ID = ROOt -->
-    <script src="App.js">
+    <!-- script type should be module, only then it will read import from App.js -->
+    <script type="module" src="App.js">
 
     </script>
 </body>
