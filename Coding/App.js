@@ -1,4 +1,4 @@
-//Making some changes
+//Removed an unimportant comment
 const heading2 = React.createElement("h1", {}, "Hello ReactJS");
 console.log(heading2); //This is the react element which is an object
 
