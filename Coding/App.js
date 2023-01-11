@@ -33,22 +33,33 @@ const HeaderComponent = () => {
   );
 };
 
+//Creating a JS Object and rendering the same restaurant card
+
+const burgerKing = {
+  image:
+    "https://b.zmtcdn.com/data/pictures/chains/1/49781/ee586b2cda6facecb181cb3850d474ed_featured_v2.jpg",
+  name: "Burger King",
+  cuisines: ["Burgers", "American"],
+  rating: "4.2",
+};
+
 const RestaurantCard = () => {
   return (
     <div className="card">
-      <img
-        src="https://b.zmtcdn.com/data/pictures/chains/1/49781/ee586b2cda6facecb181cb3850d474ed_featured_v2.jpg"
-        alt="burgerKing"
-      />
-      <h2>Burger King</h2>
-      <h3>Burgers, American</h3>
-      <h4>4.2 stars</h4>
+      <img src={burgerKing.image} alt="burgerKing" />
+      <h2>{burgerKing.name}</h2>
+      <h3>{burgerKing.cuisines}</h3>
+      <h4>{burgerKing.rating}</h4>
     </div>
   );
 };
 
 const Body = () => {
-  return <RestaurantCard></RestaurantCard>;
+  return (
+    <>
+      <RestaurantCard></RestaurantCard>
+    </>
+  );
 };
 
 const Footer = () => {};
