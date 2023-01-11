@@ -9,14 +9,12 @@ const Title = () => {
         alt="image"
         src="https://upload.wikimedia.org/wikipedia/commons/1/15/Food_Town_Webster.jpg"
       ></img>
-      <h1 style={styleobj} id="Title" key="h1">
+      <h1 id="Title" key="h1">
         Dan's Food Town
       </h1>
     </React.Fragment>
   );
 };
-
-const styleobj = { backgroundColor: "red" };
 
 const HeaderComponent = () => {
   return (
