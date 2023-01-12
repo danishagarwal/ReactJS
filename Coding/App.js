@@ -33,8 +33,45 @@ const HeaderComponent = () => {
   );
 };
 
-//Creating a JS Object and rendering the same restaurant card
+//Config Driven UI
+//Suppose we have carousel, then list of restaurant, then offers
+// If in mumbai we have something else than 50% then that will be rendered with the help of backend.
 
+// const config = [
+//   {
+//     type: "carousel",
+//     cards: [
+//       {
+//         offerName: "50%",
+//       },
+//       {
+//         offerName: "No Delievery",
+//       },
+//     ],
+//   },
+
+//   {
+//     type: "restaurants",
+//     cards: [
+//       {
+//         image:
+//           "https://b.zmtcdn.com/data/pictures/chains/1/49781/ee586b2cda6facecb181cb3850d474ed_featured_v2.jpg",
+//         name: "Burger King",
+//         cuisines: ["Burgers", "American"],
+//         rating: "4.2",
+//       },
+
+//       {
+//         image: "",
+//         name: "KFC",
+//         cuisines: ["Chicken"],
+//         rating: "4.1",
+//       },
+//     ],
+//   },
+// ];
+
+//Creating a JS Object and rendering the same restaurant card
 const burgerKing = {
   image:
     "https://b.zmtcdn.com/data/pictures/chains/1/49781/ee586b2cda6facecb181cb3850d474ed_featured_v2.jpg",
@@ -48,7 +85,7 @@ const RestaurantCard = () => {
     <div className="card">
       <img src={burgerKing.image} alt="burgerKing" />
       <h2>{burgerKing.name}</h2>
-      <h3>{burgerKing.cuisines}</h3>
+      <h3>{burgerKing.cuisines.join(", ")}</h3>
       <h4>{burgerKing.rating}</h4>
     </div>
   );
@@ -56,9 +93,16 @@ const RestaurantCard = () => {
 
 const Body = () => {
   return (
-    <>
+    <div className="restaurantList">
       <RestaurantCard></RestaurantCard>
-    </>
+      <RestaurantCard></RestaurantCard>
+      <RestaurantCard></RestaurantCard>
+      <RestaurantCard></RestaurantCard>
+      <RestaurantCard></RestaurantCard>
+      <RestaurantCard></RestaurantCard>
+      <RestaurantCard></RestaurantCard>
+      <RestaurantCard></RestaurantCard>
+    </div>
   );
 };
 
