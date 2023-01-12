@@ -85,21 +85,24 @@ const burgerKing = {
 // data? is optional chaining
 //props is the parameter
 //Pass in arguments, recieve parameters
+//Destructuring props -> restaurant
 
-const RestaurantCard = (props) => {
+const RestaurantCard = ({ restaurant }) => {
+  const { name, cloudinaryImageId, cuisines, avgRating } = restaurant.data;
+
   return (
     <div className="card">
       {/* {console.log(props)} */}
       <img
         src={
           "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
-          props.restaurant.data?.cloudinaryImageId
+          cloudinaryImageId
         }
         alt="res"
       />
-      <h2>{props.restaurant.data?.name}</h2>
-      <h3>{props.restaurant.data?.cuisines.join(", ")}</h3>
-      <h4>{props.restaurant.data?.avgRating}</h4>
+      <h2>{name}</h2>
+      <h3>{cuisines.join(", ")}</h3>
+      <h4>{avgRating}</h4>
     </div>
   );
 };
