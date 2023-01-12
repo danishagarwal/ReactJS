@@ -86,10 +86,9 @@ const burgerKing = {
 //props is the parameter
 //Pass in arguments, recieve parameters
 //Destructuring props -> restaurant
+//Destructung restaurant
 
-const RestaurantCard = ({ restaurant }) => {
-  const { name, cloudinaryImageId, cuisines, avgRating } = restaurant.data;
-
+const RestaurantCard = ({ name, cloudinaryImageId, cuisines, avgRating }) => {
   return (
     <div className="card">
       {/* {console.log(props)} */}
@@ -107,14 +106,18 @@ const RestaurantCard = ({ restaurant }) => {
   );
 };
 
+// ... spread operator, it takes all the name, cuisines, avRating from data
+// hence we don't have to pass different props each time like
+// <RestaurantCard name={restaurantList[1].data.name} cuisines= {restaurantList[1].data.cuisines}
+
 const Body = () => {
   return (
     <div className="restaurantList">
-      <RestaurantCard restaurant={restaurantList[1]}></RestaurantCard>
-      <RestaurantCard restaurant={restaurantList[2]}></RestaurantCard>
-      <RestaurantCard restaurant={restaurantList[3]}></RestaurantCard>
-      <RestaurantCard restaurant={restaurantList[4]}></RestaurantCard>
-      <RestaurantCard restaurant={restaurantList[5]}></RestaurantCard>
+      {restaurantList.map((restaurantObj) => {
+        return (
+          <RestaurantCard {...restaurantObj.data} key={restaurantObj.data.id} />
+        );
+      })}
     </div>
   );
 };
