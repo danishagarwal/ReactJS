@@ -3,11 +3,19 @@ import * as XYZ from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import { useState } from "react";
 
+function filterData(searchText, restaurants) {
+  return restaurants.filter((restaurant) =>
+    restaurant.data.name.includes(searchText)
+  );
+}
+
 const Body = () => {
   //useState() is a hook which returns an array
   const [searchText, setsearchText] = useState("");
 
-  const [searchClicked, setsearchClicked] = useState("False");
+  //This is for maitaining the restaurantList
+  const [restaurants, setrestaurants] = useState(XYZ.restaurantList);
+
   return (
     <>
       <div className="search">
@@ -20,17 +28,14 @@ const Body = () => {
           onChange={(e) => setsearchText(e.target.value)}
         />
 
-        {/* Toggle button which makes true -> False -> True */}
-        {/* React is very fast it will only re-render the thing which is changing because Virtual DOM /Diff Algorithm */}
-
-        <h1>{searchClicked}</h1>
         <button
           onClick={() => {
-            if (searchClicked == "False") {
-              setsearchClicked("True");
-            } else {
-              setsearchClicked("False");
-            }
+            //Need to filter data
+            //Search text will be the searchbar and from restaurants we have to search
+            const data = filterData(searchText, restaurants);
+
+            //Update the restaurants with the filter data
+            setrestaurants(data);
           }}
           className="search-btn"
         >
@@ -40,7 +45,7 @@ const Body = () => {
       </div>
 
       <div className="restaurantList">
-        {XYZ.restaurantList.map((restaurantObj) => {
+        {restaurants.map((restaurantObj) => {
           return (
             <RestaurantCard
               {...restaurantObj.data}
