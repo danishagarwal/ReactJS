@@ -1,4 +1,5 @@
 //This will import all the constants from the tab.
+//Comments
 import * as XYZ from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import { useState } from "react";
