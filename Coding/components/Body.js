@@ -2,19 +2,21 @@
 import * as XYZ from "../constants";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
+//Filter data from all restaurants
 function filterData(searchText, restaurants) {
   return restaurants.filter((restaurant) =>
-    restaurant.data.name.includes(searchText)
+    restaurant?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase())
   );
 }
 
 const Body = () => {
-  //useState() is a hook which returns an array
   const [searchText, setsearchText] = useState("");
 
-  //This is for maitaining the restaurantList
-  const [restaurants, setrestaurants] = useState(XYZ.restaurantList);
+  const [filteredrestaurants, setfilteredrestaurants] = useState([]);
+
+  const [restaurants, setrestaurants] = useState([]);
 
   useEffect(() => {
     getRestaurants();
@@ -25,14 +27,19 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
     );
 
-    //Converting data into json readable format
     const json = await data.json();
     console.log(json);
     setrestaurants(json?.data?.cards[2]?.data?.data?.cards);
+
+    //When no filter is provided initially our data will be allRestaurants
+    setfilteredrestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
 
   console.log(":render");
-  return (
+
+  return restaurants?.length === 0 ? (
+    <Shimmer />
+  ) : (
     <>
       <div className="search">
         <input
@@ -42,13 +49,13 @@ const Body = () => {
           value={searchText}
           onChange={(e) => setsearchText(e.target.value)}
         />
-        {/* onChange this function setsearchText will be called, and it's a callback function which takes 'e' */}
 
         <button
           onClick={() => {
-            const data = filterData(searchText, restaurants); //Need to filter data - //Search text will be the searchbar and from restaurants we have to search
-
-            setrestaurants(data); //Update the restaurants with the filter data
+            const data = filterData(searchText, restaurants);
+            console.log(data);
+            //We have to setFiltered restaurants from allrestaurants which is passed in FilterData function
+            setfilteredrestaurants(data);
           }}
           className="search-btn"
         >
@@ -57,8 +64,12 @@ const Body = () => {
       </div>
 
       <div className="restaurantList">
-        {restaurants.map((restaurantObj) => {
-          return (
+        {/* We will be displaying our filtered data on screen */}
+
+        {filteredrestaurants.map((restaurantObj) => {
+          return filteredrestaurants?.length === 0 ? (
+            <h1>No Restaurant found</h1>
+          ) : (
             <RestaurantCard
               {...restaurantObj.data}
               key={restaurantObj.data.id}
