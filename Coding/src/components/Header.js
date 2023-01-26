@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Logo from "../assets/img/logo.jpg";
 
 const Title = () => {
   return (
     <React.Fragment>
-      <img
-        className="image"
-        alt="image"
-        src="https://upload.wikimedia.org/wikipedia/commons/1/15/Food_Town_Webster.jpg"></img>
+      <img className="image" alt="image" src={Logo}></img>
       <h1 id="Title" key="h1">
         Dan's Food Town
       </h1>
