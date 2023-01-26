@@ -20,6 +20,7 @@ const Body = () => {
 
   useEffect(() => {
     getRestaurants();
+    console.log("UseEffect Called");
   }, []);
 
   async function getRestaurants() {
@@ -28,7 +29,7 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
+    console.log("useEffect");
     setrestaurants(json?.data?.cards[2]?.data?.data?.cards);
 
     //When no filter is provided initially our data will be allRestaurants
