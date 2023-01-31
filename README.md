@@ -2,5 +2,9 @@
 
 Sequence of Branches - 
 
-- Laying Path
+- Laying Foundation
+- Talk is Cheap
+- Let's get hooked
+- Exploring the world
+- Finding Path
 - Let's get classy
