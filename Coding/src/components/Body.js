@@ -6,7 +6,7 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
-
+import { All_Restaurants } from "../constants";
 const Body = () => {
   const [searchText, setsearchText] = useState("");
   const [filteredrestaurants, setfilteredrestaurants] = useState([]);
@@ -17,7 +17,7 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    const data = await fetch(XYZ.All_Restaurants);
+    const data = await fetch(All_Restaurants);
 
     const json = await data.json();
     console.log("useEffect");
@@ -35,13 +35,14 @@ const Body = () => {
   }
 
   if (!restaurants) return null;
-  return restaurants?.length === 0 ? (
+  console.log(restaurants?.length);
+  return restaurants?.length == 0 ? (
     <Shimmer />
   ) : (
     <>
-      <div className="search">
+      <div className="search p-4 bg-slate-100 my-5">
         <input
-          className="search-input"
+          className="p-1"
           placeholder="Search"
           type="text"
           value={searchText}
@@ -49,24 +50,24 @@ const Body = () => {
         />
 
         <button
+          className="px-2 p-1 text-white m-2 bg-slate-500 rounded-lg border-sky-900"
           onClick={() => {
             const data = filterData(searchText, restaurants);
             console.log(data);
             //We have to setFiltered restaurants from allrestaurants which is passed in FilterData function
             setfilteredrestaurants(data);
           }}
-          className="search-btn"
         >
           Search
         </button>
       </div>
 
-      <div className="restaurantList">
+      <div className="flex-wrap flex text-center justify-center">
         {/* We will be displaying our filtered data on screen */}
 
         {filteredrestaurants.map((restaurantObj) => {
           return filteredrestaurants?.length === 0 ? (
-            <h1>No Restaurant found</h1>
+            <h1 className="text-xl">No Restaurant found</h1>
           ) : (
             <Link
               to={"/restaurant/" + restaurantObj.data.id}
