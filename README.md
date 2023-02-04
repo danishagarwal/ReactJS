@@ -1,4 +1,4 @@
-# ReactJS Project
+# Dan's Food Town
 
 Sequence of Branches - 
 
