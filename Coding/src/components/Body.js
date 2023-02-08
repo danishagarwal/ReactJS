@@ -12,6 +12,7 @@ const Body = () => {
   const [filteredrestaurants, setfilteredrestaurants] = useState([]);
   const [restaurants, setrestaurants] = useState([]);
 
+
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -40,26 +41,28 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search p-4 bg-slate-100 my-5">
+      <div className="flex p-2 justify-center">
         <input
-          className="p-1"
+          className="outline-none text-base mob:text-xs p-[5px] basis-[350px] mob:basis-[270px] h-[30px] rounded-md ring-1 ring-gray bg-gray"
           placeholder="Search"
           type="text"
           value={searchText}
           onChange={(e) => setsearchText(e.target.value)}
         />
-
         <button
-          className="px-2 p-1 text-white m-2 bg-slate-500 rounded-lg border-sky-900"
+          // className="px-2 p-1 text-white m-2 bg-slate-500 rounded-lg border-sky-900"
+          className="btn btn--primary basis-[60px] mob:text-xs"
           onClick={() => {
             const data = filterData(searchText, restaurants);
             console.log(data);
             //We have to setFiltered restaurants from allrestaurants which is passed in FilterData function
+
             setfilteredrestaurants(data);
           }}
         >
           Search
         </button>
+
       </div>
 
       <div className="flex-wrap flex text-center justify-center">
