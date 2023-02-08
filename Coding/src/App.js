@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { lazy, useState } from "react";
 import ReactDOM from "react-dom/client";
 import HeaderComponent from "./components/Header";
 import Body from "./components/Body";
@@ -11,17 +11,25 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
 import ProfileClass from "./components/ProfileClass";
 import { Suspense } from "react";
+import Faq from "./components/Faq";
+import UserContext from "./utils/UserContext";
 
 //To create a new bundle for about.js
 //We do this so that bundler does no create only one JS file for our whole code
 const About = lazy(() => import("./components/About"));
 
+
 const AppLayout = () => {
+
+  const [user, setUser] = useState({ name: "Danish", email: "danishagarwal9@gmail.com" });
+
   return (
     <>
-      <HeaderComponent />
-      <Outlet />
-      <Footer />
+      <UserContext.Provider value={{ user: user, }}>
+        <HeaderComponent />
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
     </>
   );
 };
@@ -54,6 +62,11 @@ const appRouter = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/faq",
+        element: <Faq></Faq>
+      },
+
       {
         path: "/restaurant/:id",
         element: <RestaurantMenu />,
