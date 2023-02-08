@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 import { All_Restaurants } from "../constants";
-const Body = () => {
+const Body = ({ user }) => {
   const [searchText, setsearchText] = useState("");
   const [filteredrestaurants, setfilteredrestaurants] = useState([]);
   const [restaurants, setrestaurants] = useState([]);
@@ -27,6 +27,7 @@ const Body = () => {
     //When no filter is provided initially our data will be allRestaurants
     setfilteredrestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
+
 
   const isOnline = useOnline();
   console.log(!isOnline);
@@ -76,7 +77,7 @@ const Body = () => {
               to={"/restaurant/" + restaurantObj.data.id}
               key={restaurantObj.data.id}
             >
-              <RestaurantCard
+              <RestaurantCard user={user}
                 {...restaurantObj.data}
                 key={restaurantObj.data.id}
               />
