@@ -35,6 +35,9 @@ const HeaderComponent = () => {
               <Link to="/contact"> Contact</Link>
             </li>
             <li className="px-2">
+              <Link to="/faq"> FAQ</Link>
+            </li>
+            <li className="px-2">
               <Link to="/contact"> Cart</Link>
             </li>
           </ul>

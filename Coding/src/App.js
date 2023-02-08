@@ -11,14 +11,11 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
 import ProfileClass from "./components/ProfileClass";
 import { Suspense } from "react";
-
+import Faq from "./components/Faq";
 
 //To create a new bundle for about.js
 //We do this so that bundler does no create only one JS file for our whole code
 const About = lazy(() => import("./components/About"));
-
-
-
 
 const AppLayout = () => {
   return (
@@ -38,8 +35,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        // Props Drilling
-        element: <Body user={{ name: "Danish", email: "dan@gmail.com" }} />,
+        element: <Body />,
       },
       {
         path: "/about",
@@ -59,6 +55,11 @@ const appRouter = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/faq",
+        element: <Faq></Faq>
+      },
+
       {
         path: "/restaurant/:id",
         element: <RestaurantMenu />,
