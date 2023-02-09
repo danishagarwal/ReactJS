@@ -1,4 +1,4 @@
-import React, { lazy, useState } from "react";
+import React, { lazy, useState, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import HeaderComponent from "./components/Header";
 import Body from "./components/Body";
@@ -10,9 +10,11 @@ import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
 import ProfileClass from "./components/ProfileClass";
-import { Suspense } from "react";
 import Faq from "./components/Faq";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./components/Cart";
 
 //To create a new bundle for about.js
 //We do this so that bundler does no create only one JS file for our whole code
@@ -24,13 +26,17 @@ const AppLayout = () => {
   const [user, setUser] = useState({ name: "Danish", email: "danishagarwal9@gmail.com" });
 
   return (
-    <>
+    //Providing our redux store to whole app, store prop name is imp.
+    <Provider store={store}>
+
+      {/* Providing userContext i.e username to whole app */}
       <UserContext.Provider value={{ user: user, }}>
+
         <HeaderComponent />
         <Outlet />
         <Footer />
       </UserContext.Provider>
-    </>
+    </Provider>
   );
 };
 
@@ -63,10 +69,13 @@ const appRouter = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
         path: "/faq",
         element: <Faq></Faq>
       },
-
       {
         path: "/restaurant/:id",
         element: <RestaurantMenu />,

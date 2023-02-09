@@ -44,6 +44,6 @@ export const FAQ = [
     id: 6,
     title: "Is single order from many restaurants possible?",
     description:
-      "We currently do not support this functionality. However, you can place orders for individual items from different restaurants.",
+      "Yes you can add multiple items from different restaurants in your cart easily.",
   },
 ];
