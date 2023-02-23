@@ -18,7 +18,7 @@
         <!-- Anything inside this will not be rendered because react is present and it overrides everything -->
         <!-- It will just be displated for a milisecond because it takes time to load the React script -->
     </div>
-    <!-- script type should be module, only then it will read import from App.js -->
+    <!-- script type should be module, only then it will read import from App.js else it gives error cannot read import outside module -->
     <script type="module" src="./src/App.js">
     </script>
 </body>

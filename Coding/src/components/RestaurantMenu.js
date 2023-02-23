@@ -68,7 +68,7 @@ const RestaurantMenu = () => {
                       onClick={() => addFoodItem(item)}
                       className="p-1 bg-green-50 rounded-lg"
                     >
-                      Add
+                      Add Item
                     </button>
                   </div>
                 </div>

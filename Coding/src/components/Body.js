@@ -12,7 +12,6 @@ const Body = () => {
   const [filteredrestaurants, setfilteredrestaurants] = useState([]);
   const [restaurants, setrestaurants] = useState([]);
 
-
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -28,9 +27,8 @@ const Body = () => {
     setfilteredrestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
 
-
   const isOnline = useOnline();
-  console.log(!isOnline);
+  // console.log(!isOnline);
 
   if (!isOnline) {
     return <h1> 🔴 Offline! Please check your internet connection</h1>;
@@ -43,13 +41,15 @@ const Body = () => {
   ) : (
     <>
       <div className="flex p-2 justify-center">
-        <input className="outline-none text-base mob:text-xs p-[5px] basis-[350px] mob:basis-[270px] h-[30px] rounded-md ring-1 ring-gray bg-gray"
+        <input
+          className="outline-none text-base mob:text-xs p-[5px] basis-[350px] mob:basis-[270px] h-[30px] rounded-md ring-1 ring-gray bg-gray"
           placeholder="Search"
           type="text"
           value={searchText}
           onChange={(e) => setsearchText(e.target.value)}
         />
-        <button className="btn btn--primary basis-[60px] mob:text-xs"
+        <button
+          className="btn btn--primary basis-[60px] mob:text-xs"
           onClick={() => {
             const data = filterData(searchText, restaurants);
             console.log(data);
@@ -60,20 +60,35 @@ const Body = () => {
         >
           Search
         </button>
-
       </div>
 
       <div className="flex-wrap flex text-center justify-center">
         {/* We will be displaying our filtered data on screen */}
+        {console.log(filteredrestaurants.length)}
+
+        {filteredrestaurants?.length === 0 ? (
+          <h1 className="text-xl font-bold">
+            No Restaurants Found. Try modifying your search and click on the
+            button again
+          </h1>
+        ) : (
+          <h1></h1>
+        )}
 
         {filteredrestaurants.map((restaurantObj) => {
-          return filteredrestaurants?.length === 0 ? (<h1 className="text-xl">No Restaurant found</h1>)
-            :
-            (
-              <Link to={"/restaurant/" + restaurantObj.data.id} key={restaurantObj.data.id}>
-                <RestaurantCard {...restaurantObj.data} key={restaurantObj.data.id} />
-              </Link>
-            );
+          return filteredrestaurants?.length === 0 ? (
+            <h1 className="text-xl font-bold">No Restaurant found</h1>
+          ) : (
+            <Link
+              to={"/restaurant/" + restaurantObj.data.id}
+              key={restaurantObj.data.id}
+            >
+              <RestaurantCard
+                {...restaurantObj.data}
+                key={restaurantObj.data.id}
+              />
+            </Link>
+          );
         })}
       </div>
     </>

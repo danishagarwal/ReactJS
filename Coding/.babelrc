@@ -1,3 +1,13 @@
+// babel rc requires json object
+
 {
+  //To remove console logs - 
   //  "plugins": [ ["transform-remove-console", { "exclude": [ "error", "warn"] }] ]
+
+  //To make understand that we are using import and this is JSON object not JS object
+  "presets": [["@babel/preset-env", {"targets": {"node": "current"}}],
+              ["@babel/preset-react", {"runtime" : "automatic"}] //Take runtime automatic not necessary jsx or anything else
+            ]
+  
+
   }

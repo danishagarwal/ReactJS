@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ReactDOM from "react-dom/client";
-import Logo from "../assets/img/logo.jpg";
+import Logo from "../assets/img/logo.png";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const Title = () => {
   return (
     <React.Fragment>
-      <img className="h-28 px-2 py-2" alt="image" src={Logo}></img>
+      <a href="/"><img data-testid="logo" className="h-28 px-2 py-2" alt="image" src={Logo}></img></a>
 
       <h1
         className="font-semibold text-3xl py-10 pl-24"
