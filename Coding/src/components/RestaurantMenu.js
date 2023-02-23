@@ -17,11 +17,11 @@ const RestaurantMenu = () => {
 
   const addFoodItem = (item) => {
     dispatch(addItem(item));
-  }
+  };
 
   const handleAddItem = () => {
     dispatch(addItem("Bleh"));
-  }
+  };
   return !restaurant ? (
     <Shimmer />
   ) : (
@@ -29,7 +29,11 @@ const RestaurantMenu = () => {
       {console.log(restaurant.menu)}
       <div className="container">
         <div className="flex justify-center items-center p-5">
-          <img className="w-[254px] h-[165px] " src={Img_url + restaurant.cloudinaryImageId} alt="" />
+          <img
+            className="w-[254px] h-[165px] "
+            src={Img_url + restaurant.cloudinaryImageId}
+            alt=""
+          />
           <ul>
             <div className="px-5">
               <h1 className="text-3xl">{restaurant.name}</h1>
@@ -42,20 +46,33 @@ const RestaurantMenu = () => {
         <div>
           {/* <button onClick={() => handleAddItem()}>Add Item</button> */}
         </div>
+
         <div className="">
-          <h1>Menu</h1>
+          <h1 className="text-4xl font-bold">Menu</h1>
           <div className="p-2 text-center">
             <ul>
-
               {Object.values(restaurant?.menu?.items).map((item) => (
-                <div className="flex p-2 ">
-                  {/* <img className="w-[200px] h-[100px]" src={Img_url + item.cloudinaryImageId} /> */}
-
-                  <li className="p-2" key={item.id}>{item.name} <button onClick={() => addFoodItem(item)} className="p-1 bg-green-50 rounded-lg">Add</button></li>
-
+                <div className="flex p-2 mt-5 px-3 items-center text-sm font-semibold pb-2.5  ">
+                  <img
+                    className="w-[200px] h-[100px]"
+                    src={Img_url + item.cloudinaryImageId}
+                  />
+                  <div className="flex justify-center items-center">
+                    <li className="p-2 px-5" key={item.id}>
+                      {item.name}
+                      <p className="w-10 font-thin text-sm">
+                        {"₹ " + item.price / 100}
+                      </p>
+                    </li>
+                    <button
+                      onClick={() => addFoodItem(item)}
+                      className="p-1 bg-green-50 rounded-lg"
+                    >
+                      Add
+                    </button>
+                  </div>
                 </div>
-              )
-              )}
+              ))}
             </ul>
           </div>
         </div>
