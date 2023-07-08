@@ -12,22 +12,23 @@ const Body = () => {
   const [filteredrestaurants, setfilteredrestaurants] = useState([]);
   const [restaurants, setrestaurants] = useState([]);
 
-
   useEffect(() => {
     getRestaurants();
   }, []);
 
   async function getRestaurants() {
-    const data = await fetch(All_Restaurants);
+    try {
+      const data = await fetch(All_Restaurants);
 
-    const json = await data.json();
-    console.log("useEffect");
-    setrestaurants(json?.data?.cards[2]?.data?.data?.cards);
-
-    //When no filter is provided initially our data will be allRestaurants
-    setfilteredrestaurants(json?.data?.cards[2]?.data?.data?.cards);
+      const json = await data.json();
+      console.log(json);
+      setrestaurants(json?.data?.cards[1]?.data?.data?.cards);
+      //When no filter is provided initially our data will be allRestaurants
+      setfilteredrestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    } catch (error) {
+      console.log(error);
+    }
   }
-
 
   const isOnline = useOnline();
   console.log(!isOnline);
@@ -43,13 +44,15 @@ const Body = () => {
   ) : (
     <>
       <div className="flex p-2 justify-center">
-        <input className="outline-none text-base mob:text-xs p-[5px] basis-[350px] mob:basis-[270px] h-[30px] rounded-md ring-1 ring-gray bg-gray"
+        <input
+          className="outline-none text-base mob:text-xs p-[5px] basis-[350px] mob:basis-[270px] h-[30px] rounded-md ring-1 ring-gray bg-gray"
           placeholder="Search"
           type="text"
           value={searchText}
           onChange={(e) => setsearchText(e.target.value)}
         />
-        <button className="btn btn--primary basis-[60px] mob:text-xs"
+        <button
+          className="btn btn--primary basis-[60px] mob:text-xs"
           onClick={() => {
             const data = filterData(searchText, restaurants);
             console.log(data);
@@ -60,20 +63,25 @@ const Body = () => {
         >
           Search
         </button>
-
       </div>
 
       <div className="flex-wrap flex text-center justify-center">
         {/* We will be displaying our filtered data on screen */}
 
         {filteredrestaurants.map((restaurantObj) => {
-          return filteredrestaurants?.length === 0 ? (<h1 className="text-xl">No Restaurant found</h1>)
-            :
-            (
-              <Link to={"/restaurant/" + restaurantObj.data.id} key={restaurantObj.data.id}>
-                <RestaurantCard {...restaurantObj.data} key={restaurantObj.data.id} />
-              </Link>
-            );
+          return filteredrestaurants?.length === 0 ? (
+            <h1 className="text-xl">No Restaurant found</h1>
+          ) : (
+            <Link
+              to={"/restaurant/" + restaurantObj.data.id}
+              key={restaurantObj.data.id}
+            >
+              <RestaurantCard
+                {...restaurantObj.data}
+                key={restaurantObj.data.id}
+              />
+            </Link>
+          );
         })}
       </div>
     </>
