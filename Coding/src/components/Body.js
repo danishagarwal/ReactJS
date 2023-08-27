@@ -22,9 +22,15 @@ const Body = () => {
 
       const json = await data.json();
       console.log(json);
-      setrestaurants(json?.data?.cards[1]?.data?.data?.cards);
+      setrestaurants(
+        json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
       //When no filter is provided initially our data will be allRestaurants
-      setfilteredrestaurants(json?.data?.cards[2]?.data?.data?.cards);
+      setfilteredrestaurants(
+        json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
     } catch (error) {
       console.log(error);
     }
@@ -73,12 +79,12 @@ const Body = () => {
             <h1 className="text-xl">No Restaurant found</h1>
           ) : (
             <Link
-              to={"/restaurant/" + restaurantObj.data.id}
-              key={restaurantObj.data.id}
+              to={"/restaurant/" + restaurantObj.info.id}
+              key={restaurantObj.info.id}
             >
               <RestaurantCard
-                {...restaurantObj.data}
-                key={restaurantObj.data.id}
+                {...restaurantObj.info}
+                key={restaurantObj.info.id}
               />
             </Link>
           );
